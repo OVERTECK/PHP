@@ -37,10 +37,6 @@ class Book
 
     public function setTitle(string $title): void
     {
-        if (!is_string($title)) {
-            throw new TypeError("Атрибут должен быть строкой.");
-        }
-
         if (empty($title)) {
             throw new ValueError("Атрибут 'name' не должен быть пустым.");
         }
@@ -50,10 +46,6 @@ class Book
 
     public function setAuthor(string $author): void
     {
-        if (!is_string($author)) {
-            throw new TypeError("Атрибут должен быть строкой.");
-        }
-
         if (empty($author)) {
             throw new ValueError("Атрибут 'author' не должен быть пустым.");
         }
@@ -63,10 +55,6 @@ class Book
 
     public function setUblishedYear(int $ublishedYear): void
     {
-        if (!is_integer($ublishedYear)) {
-            throw new TypeError("Атрибут должен быть целым числом.");
-        }
-
         if ($ublishedYear <= 0) {
             throw new ValueError("Значение атрибута не должно быть меньше или равно нулю.");
         }
@@ -76,10 +64,6 @@ class Book
 
     public function setGenre(string $genre): void
     {
-        if (!is_string($genre)) {
-            throw new TypeError("Атрибут должен быть строкой.");
-        }
-
         if (empty($genre)) {
             throw new ValueError("Атрибут 'genre' не должен быть пустым.");
         }

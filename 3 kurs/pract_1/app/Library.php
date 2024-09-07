@@ -33,7 +33,7 @@ class Library
 
         foreach ($this->books as $book) {
             if ($book->getAuthor() === $author) {
-                array_push($result, $book);
+                $result[] = $book;
             }
         }
 
