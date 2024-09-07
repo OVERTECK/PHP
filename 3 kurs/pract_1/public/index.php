@@ -5,7 +5,7 @@ require_once "D:\Projects\PHP\\3 kurs\pract_1\app\Library.php";
 
 $books = [];
 
-for ($i = 0; $i < 10; $i++) { 
+for ($i = 1; $i < 10; $i++) {
     array_push($books, new Book("title: $i", "author: $i", $i, "genre: $i"));
 }
 
@@ -19,6 +19,6 @@ print_r($my_library->listAllBooks());
 
 print_r($my_library->findBooksByAuthor("Я"));
 
-print_r($my_library->removeBookByTitle("Добавленная книга"));
+// $my_library->removeBookByTitle("Добавленная книга");
 
-print_r($my_library->findBooksByAuthor("Я"));
+// print_r($my_library->findBooksByAuthor("Я"));

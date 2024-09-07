@@ -7,27 +7,35 @@ class Book
     private int $ublishedYear;
     private string $genre;
 
-    public function getTitle()
+    public function __construct(string $title, string $author, int $ublishedYear, string $genre)
+    {
+        $this->setTitle($title);
+        $this->setAuthor($author);
+        $this->setUblishedYear($ublishedYear);
+        $this->setGenre($genre);
+    }
+
+    public function getTitle(): string
     {
         return $this->title;
     }
 
-    public function getAuthor()
+    public function getAuthor(): string
     {
         return $this->author;
     }
 
-    public function getUblishedYear()
+    public function getUblishedYear(): int
     {
         return $this->ublishedYear;
     }
 
-    public function getGenre()
+    public function getGenre(): string
     {
         return $this->genre;
     }
 
-    public function setTitle(string $title)
+    public function setTitle(string $title): void
     {
         if (!is_string($title)) {
             throw new TypeError("Атрибут должен быть строкой.");
@@ -40,27 +48,23 @@ class Book
         $this->title = $title;
     }
 
-    public function setAuthor(string $author)
+    public function setAuthor(string $author): void
     {
-        if (is_string($author)) {
+        if (!is_string($author)) {
             throw new TypeError("Атрибут должен быть строкой.");
         }
 
-        if (empty($value)) {
+        if (empty($author)) {
             throw new ValueError("Атрибут 'author' не должен быть пустым.");
         }
 
         $this->author = $author;
     }
 
-    public function setUblishedYear(int $ublishedYear)
+    public function setUblishedYear(int $ublishedYear): void
     {
-        if (is_integer($ublishedYear)) {
+        if (!is_integer($ublishedYear)) {
             throw new TypeError("Атрибут должен быть целым числом.");
-        }
-
-        if (empty($ublishedYear)) {
-            throw new ValueError("Атрибут 'ublishedYear' не должен быть пустым.");
         }
 
         if ($ublishedYear <= 0) {
@@ -70,9 +74,9 @@ class Book
         $this->ublishedYear = $ublishedYear;
     }
 
-    public function setGenre(string $genre)
+    public function setGenre(string $genre): void
     {
-        if (is_string($genre)) {
+        if (!is_string($genre)) {
             throw new TypeError("Атрибут должен быть строкой.");
         }
 
@@ -83,16 +87,7 @@ class Book
         $this->genre = $genre;
     }
 
-
-    public function __construct($title, $author, $ublishedYear, $genre)
-    {
-        $this->setTitle($title);
-        $this->setAuthor($author);
-        $this->setUblishedYear($ublishedYear);
-        $this->setGenre($genre);
-    }
-
-    public function getBookInfo()
+    public function getBookInfo(): string
     {
         return "$this->title, $this->author, $this->ublishedYear, $this->ublishedYear";
     }
