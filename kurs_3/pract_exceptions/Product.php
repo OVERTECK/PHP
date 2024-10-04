@@ -1,6 +1,10 @@
 <?php
 
-use myExceptions;
+declare(strict_types=1);
+
+namespace Product;
+
+use myExceptions\OutOfStockException;
 
 class Product
 {
@@ -39,7 +43,7 @@ class Product
     public function reduceStock(int $quantity): void
     {
         if ($this->stock - $quantity < 0) {
-            throw new myExceptions\OutOfStockException("Количество не может быть меньше нуля.");
+            throw new OutOfStockException("Количество не может быть меньше нуля.");
         }
 
         $this->stock -= $quantity;
