@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Checkout;
 
 use Cart\Cart;
-use myExceptions\IncorrectPaymentMethod;
 use myExceptions\InsufficientFundsException;
 use myExceptions\PaymentGatewayException;
 
@@ -25,6 +24,13 @@ class Checkout
         $this->paymentMethod = $method;
     }
 
+    /**
+     * Summary of processPayment
+     * @param mixed $amount
+     * @throws \myExceptions\PaymentGatewayException
+     * @throws \myExceptions\InsufficientFundsException
+     * @return void
+     */
     public function processPayment($amount): void
     {
         $method = $this->paymentMethod;
