@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Checkout;
 
+require_once 'myExceptions.php';
+
 use Cart\Cart;
 use myExceptions\InsufficientFundsException;
 use myExceptions\PaymentGatewayException;
@@ -12,7 +14,7 @@ class Checkout
 {
     private Cart $cart;
     private string $paymentMethod = 'credit card';
-    private float $userBalance;
+    private float $userBalance = 200;
 
     public function __construct(Cart $cart)
     {
