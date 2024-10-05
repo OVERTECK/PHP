@@ -1,0 +1,14 @@
+{
+    "require-dev": {
+        "phpstan/phpstan": "^1.12"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "myExceptions\\": "exceptions",
+            "Cart\\": "src",
+            "Checkout\\": "src",
+            "Product\\": "src"
+        }
+    }
+}
