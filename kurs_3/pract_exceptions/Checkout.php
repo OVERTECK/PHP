@@ -33,7 +33,7 @@ class Checkout
             case 'credit card':
                 break;
             default:
-                throw new IncorrectPaymentMethod('Данный способ оплаты не найден.');
+                throw new PaymentGatewayException('Данный способ оплаты не найден.');
         }
 
         if ($amount > $this->userBalance) {
