@@ -13,6 +13,14 @@ class Cart
     private array $items = [];
     private int $maxItems = 20;
 
+    /**
+     * Summary of addItem
+     * @param \Product\Product $product
+     * @param int $quantity
+     * @throws \myExceptions\OutOfStockException
+     * @throws \myExceptions\CartLimitExceededException
+     * @return void
+     */
     public function addItem(Product $product, int $quantity): void
     {
         if ($product->getStock() < $quantity) {
@@ -23,7 +31,7 @@ class Cart
             throw new CartLimitExceededException("Превышение максимального количества товаров в корзине.");
         }
 
-        for ($i = 0; $i < $quantity; $i++) { 
+        for ($i = 0; $i < $quantity; $i++) {
             $this->items[] = $product;
         }
     }
@@ -36,7 +44,7 @@ class Cart
 
             if ($item === $product) {
                 unset($this->items[$key]);
-                
+
                 break;
             }
         }
