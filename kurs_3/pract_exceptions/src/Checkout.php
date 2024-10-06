@@ -23,19 +23,19 @@ class Checkout
         $this->cart = $cart;
     }
 
-    public function setPaymentMethod($method): void
+    public function setPaymentMethod(string $method): void
     {
         $this->paymentMethod = $method;
     }
 
     /**
      * Summary of processPayment
-     * @param mixed $amount
+     * @param int $amount
      * @throws \myExceptions\PaymentGatewayException
      * @throws \myExceptions\InsufficientFundsException
      * @return void
      */
-    public function processPayment($amount): void
+    public function processPayment(float $amount): void
     {
         $method = $this->paymentMethod;
 
