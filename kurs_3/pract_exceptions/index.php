@@ -16,8 +16,10 @@ $cart = new Cart();
 
 $cart->addItem($apple, 1);
 $cart->addItem($banana, 3);
-$cart->addItem($milk, 3);
+$cart->addItem($milk, 1);
 
 $checkout = new Checkout($cart);
+
+$checkout->setPaymentMethod("credit card");
 
 $checkout->finalizeOrder();
