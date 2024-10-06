@@ -12,6 +12,7 @@ class Cart
 {
     /**
      * Summary of items
+     *
      * @var array<Product>
      */
     private array $items = [];
@@ -19,8 +20,9 @@ class Cart
 
     /**
      * Summary of addItem
-     * @param \Product\Product $product
-     * @param int $quantity
+     *
+     * @param  \Product\Product $product
+     * @param  int              $quantity
      * @throws \myExceptions\OutOfStockException
      * @throws \myExceptions\CartLimitExceededException
      * @return void
@@ -69,6 +71,7 @@ class Cart
 
     /**
      * Summary of getItems
+     *
      * @return array<Product>
      */
     public function getItems(): array

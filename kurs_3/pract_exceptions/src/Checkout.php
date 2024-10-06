@@ -30,7 +30,8 @@ class Checkout
 
     /**
      * Summary of processPayment
-     * @param float $amount
+     *
+     * @param  float $amount
      * @throws \myExceptions\PaymentGatewayException
      * @throws \myExceptions\InsufficientFundsException
      * @return void
@@ -40,10 +41,10 @@ class Checkout
         $method = $this->paymentMethod;
 
         switch ($method) {
-            case 'credit card':
-                break;
-            default:
-                throw new PaymentGatewayException('Данный способ оплаты не найден.');
+        case 'credit card':
+            break;
+        default:
+            throw new PaymentGatewayException('Данный способ оплаты не найден.');
         }
 
         if ($amount > $this->userBalance) {

@@ -36,7 +36,8 @@ class Product
 
     /**
      * Summary of reduceStock
-     * @param int $quantity
+     *
+     * @param  int $quantity
      * @throws \myExceptions\OutOfStockException
      * @return void
      */
