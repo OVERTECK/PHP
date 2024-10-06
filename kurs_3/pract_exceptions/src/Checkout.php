@@ -30,7 +30,7 @@ class Checkout
 
     /**
      * Summary of processPayment
-     * @param int $amount
+     * @param float $amount
      * @throws \myExceptions\PaymentGatewayException
      * @throws \myExceptions\InsufficientFundsException
      * @return void
