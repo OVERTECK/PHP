@@ -1,6 +1,8 @@
 {
     "require-dev": {
-        "phpstan/phpstan": "^1.12"
+        "phpstan/phpstan": "^1.12",
+        "squizlabs/php_codesniffer": "^3.10",
+        "slevomat/coding-standard": "^8.15"
     },
 
     "autoload": {
@@ -9,6 +11,11 @@
             "Cart\\": "src",
             "Checkout\\": "src",
             "Product\\": "src"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
         }
     }
 }
