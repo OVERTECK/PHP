@@ -10,6 +10,10 @@ use Product\Product;
 
 class Cart
 {
+    /**
+     * Summary of items
+     * @var array<Product>
+     */
     private array $items = [];
     private int $maxItems = 20;
 
@@ -63,6 +67,10 @@ class Cart
         return $resultSum;
     }
 
+    /**
+     * Summary of getItems
+     * @return array<Product>
+     */
     public function getItems(): array
     {
         return $this->items;
