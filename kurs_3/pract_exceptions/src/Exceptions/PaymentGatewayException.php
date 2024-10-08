@@ -1,6 +1,6 @@
 <?php
 
-namespace myExceptions;
+namespace App\Exceptions;
 
 class PaymentGatewayException extends \Exception
 {

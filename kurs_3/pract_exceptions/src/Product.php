@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Product;
+namespace App;
 
-use myExceptions\OutOfStockException;
+use App\Exceptions\OutOfStockException;
 
 class Product
 {
@@ -36,9 +36,8 @@ class Product
 
     /**
      * Summary of reduceStock
-     *
-     * @param  int $quantity
-     * @throws \myExceptions\OutOfStockException
+     * @param int $quantity
+     * @throws \App\Exceptions\OutOfStockException
      * @return void
      */
     public function reduceStock(int $quantity): void

@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Checkout;
+namespace App;
 
 require_once 'vendor\\autoload.php';
 
-use Cart\Cart;
-use myExceptions\CartLimitExceededException;
-use myExceptions\InsufficientFundsException;
-use myExceptions\OutOfStockException;
-use myExceptions\PaymentGatewayException;
+use App\Cart;
+use App\Exceptions\CartLimitExceededException;
+use App\Exceptions\InsufficientFundsException;
+use App\Exceptions\OutOfStockException;
+use App\Exceptions\PaymentGatewayException;
 
 class Checkout
 {
@@ -30,10 +30,9 @@ class Checkout
 
     /**
      * Summary of processPayment
-     *
-     * @param  float $amount
-     * @throws \myExceptions\PaymentGatewayException
-     * @throws \myExceptions\InsufficientFundsException
+     * @param float $amount
+     * @throws \App\Exceptions\PaymentGatewayException
+     * @throws \App\Exceptions\InsufficientFundsException
      * @return void
      */
     public function processPayment(float $amount): void

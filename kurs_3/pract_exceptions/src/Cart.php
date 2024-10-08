@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Cart;
+namespace App;
 
-use myExceptions\OutOfStockException;
-use myExceptions\CartLimitExceededException;
-use Product\Product;
+use App\Exceptions\OutOfStockException;
+use App\Exceptions\CartLimitExceededException;
+use App\Product;
 
 class Cart
 {
@@ -20,11 +20,10 @@ class Cart
 
     /**
      * Summary of addItem
-     *
-     * @param  \Product\Product $product
-     * @param  int              $quantity
-     * @throws \myExceptions\OutOfStockException
-     * @throws \myExceptions\CartLimitExceededException
+     * @param \App\Product $product
+     * @param int $quantity
+     * @throws \App\Exceptions\OutOfStockException
+     * @throws \App\Exceptions\CartLimitExceededException
      * @return void
      */
     public function addItem(Product $product, int $quantity): void
