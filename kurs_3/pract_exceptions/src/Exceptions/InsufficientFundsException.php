@@ -1,6 +1,6 @@
 <?php
 
-namespace myExceptions;
+namespace App\Exceptions;
 
 class InsufficientFundsException extends \Exception
 {
