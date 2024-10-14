@@ -1,0 +1,22 @@
+{
+    "name": "user/pract_3",
+    "autoload": {
+        "psr-4": {
+            "User\\Pract3\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Korkin Alexsandr",
+            "email": "korkin.06@inbox.ru"
+        }
+    ],
+    "require-dev": {
+        "slevomat/coding-standard": "^8.15"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}
