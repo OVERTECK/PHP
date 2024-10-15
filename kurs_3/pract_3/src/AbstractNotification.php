@@ -14,7 +14,7 @@ abstract class AbstractNotification implements Notification
     protected string $timestamp;
     protected string $type;
 
-    public function __construct($status, $type)
+    public function __construct(string $status, string $type)
     {
         $this->status = $status;
         $this->type = $type;
