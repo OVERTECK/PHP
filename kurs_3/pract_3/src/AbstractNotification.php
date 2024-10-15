@@ -3,9 +3,6 @@
 declare(strict_types=1);
 
 namespace User\Pract3;
-
-require_once "vendor\\autoload.php";
-
 abstract class AbstractNotification implements Notification
 {
 

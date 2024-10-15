@@ -6,8 +6,6 @@ namespace User\Pract3;
 
 use Exception;
 
-require_once "vendor\\autoload.php";
-
 date_default_timezone_set('Europe/Moscow');   
 
 class EmailNotification extends AbstractNotification
