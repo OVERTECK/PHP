@@ -15,9 +15,7 @@ class SMSNotification extends AbstractNotification
     public function send(string $message): void
     {
         try {
-            $type = $this->getType();
-
-            echo "[$type] $message";
+            echo $message;
 
             $this->timestamp = date(DATE_ATOM);
             
