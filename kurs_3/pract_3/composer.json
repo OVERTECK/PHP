@@ -12,7 +12,8 @@
         }
     ],
     "require-dev": {
-        "slevomat/coding-standard": "^8.15"
+        "slevomat/coding-standard": "^8.15",
+        "phpstan/phpstan": "^1.12"
     },
     "config": {
         "allow-plugins": {
