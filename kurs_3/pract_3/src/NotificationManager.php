@@ -10,12 +10,17 @@ require_once "vendor\\autoload.php";
 
 class NotificationManager
 {
-    private array $notificationHistory;
+    /**
+     * Summary of notificationHistory
+     *
+     * @var array<int, array<string, string>|null>
+     */
+    private array $notificationHistory = [];
 
     public function sendNotification(Notification $notification, string $messageText): void
     {
         $notification->send($messageText);
-    
+
         $this->notificationHistory[] = [
             "Time" => $notification->getTimeStamp(),
             "Status" => $notification->getStatus(),
@@ -24,6 +29,11 @@ class NotificationManager
         ];
     }
 
+    /**
+     * Summary of getNotificationHistory
+     *
+     * @return array<int, array<string, string> | null>
+     */
     public function getNotificationHistory(): array
     {
         return $this->notificationHistory;
@@ -34,18 +44,24 @@ class NotificationManager
         try {
             $file = fopen(__DIR__ . "/$fileName", "w");
 
-            $notificationHistory = $this->getNotificationHistory();
-
-            foreach ($notificationHistory as $message) {
-                foreach ($message as $key => $value) {
-                    fwrite($file, "$key: $value\n");                    
+            if ($file) {
+                $notificationHistory = $this->getNotificationHistory();
+    
+                foreach ($notificationHistory as $message) {
+                    
+                    if ($message !== null) {
+                        foreach ($message as $key => $value) {
+                            fwrite($file, "$key: $value\n");
+                        }
+                        fwrite($file, "\n");
+                    }
                 }
-                fwrite($file, "\n");
+    
+                fclose($file);
             }
+
         } catch (Exception $ex) {
             echo $ex->getMessage();
-        } finally {
-            fclose($file);
         }
     }
 }

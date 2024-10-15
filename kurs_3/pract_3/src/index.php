@@ -13,6 +13,8 @@ $smsNot = new SMSNotification("Отправлено", "Обычное");
 
 $notManager->sendNotification($smsNot, "Привет");
 
+$notManager->sendNotification($smsNot, "Some message");
+
 print_r($notManager->getNotificationHistory());
 
 $notManager->writeHistoryToFile("history.txt");
