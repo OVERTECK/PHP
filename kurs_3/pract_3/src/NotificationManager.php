@@ -37,6 +37,12 @@ class NotificationManager
         return $this->notificationHistory;
     }
 
+    /**
+     * Summary of writeHistoryToFile
+     *
+     * @param  string $fileName
+     * @return void
+     */
     public function writeHistoryToFile(string $fileName): void
     {
         try {
@@ -44,9 +50,9 @@ class NotificationManager
 
             if ($file) {
                 $notificationHistory = $this->getNotificationHistory();
-    
+
                 foreach ($notificationHistory as $message) {
-                    
+
                     if ($message !== null) {
                         foreach ($message as $key => $value) {
                             fwrite($file, "$key: $value\n");
@@ -54,10 +60,9 @@ class NotificationManager
                         fwrite($file, "\n");
                     }
                 }
-    
+
                 fclose($file);
             }
-
         } catch (Exception $ex) {
             echo $ex->getMessage();
         }

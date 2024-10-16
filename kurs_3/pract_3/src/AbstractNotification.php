@@ -3,10 +3,9 @@
 declare(strict_types=1);
 
 namespace User\Pract3;
+
 abstract class AbstractNotification implements Notification
 {
-
-   
     protected string $status;
     protected string $timestamp;
     protected string $type;

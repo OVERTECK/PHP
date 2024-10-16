@@ -6,7 +6,7 @@ namespace User\Pract3;
 
 use Exception;
 
-date_default_timezone_set('Europe/Moscow');   
+date_default_timezone_set('Europe/Moscow');
 
 class EmailNotification extends AbstractNotification
 {
@@ -16,7 +16,6 @@ class EmailNotification extends AbstractNotification
             echo $message;
 
             $this->timestamp = date(DATE_ATOM);
-            
         } catch (Exception $ex) {
             echo $ex->getMessage();
         }
