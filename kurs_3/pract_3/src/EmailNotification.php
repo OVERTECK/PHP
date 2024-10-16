@@ -6,8 +6,6 @@ namespace User\Pract3;
 
 use Exception;
 
-date_default_timezone_set('Europe/Moscow');
-
 class EmailNotification extends AbstractNotification
 {
     public function send(string $message): void
