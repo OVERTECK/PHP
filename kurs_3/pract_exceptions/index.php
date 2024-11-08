@@ -2,11 +2,9 @@
 
 declare(strict_types=1);
 
-require_once 'vendor\\autoload.php';
+namespace App;
 
-use Cart\Cart;
-use Product\Product;
-use Checkout\Checkout;
+require_once 'vendor\\autoload.php';
 
 $apple = new Product('apple', 20.5, 100);
 $banana = new Product('banana', 30, 200);
