@@ -2,10 +2,22 @@
 
 namespace App;
 
-declare(strict_types=1);
-
 interface FileManager
 {
-    public function readFile($fileName);
-    public function writeFile($fileName, $data);
+    /**
+     * Summary of readFile
+     *
+     * @param  string $pathToFile
+     * @return ?string
+     */
+    public function readFile(string $pathToFile);
+
+    /**
+     * Summary of writeFile
+     *
+     * @param  string $pathToFile
+     * @param  string $data
+     * @return void
+     */
+    public function writeFile(string $pathToFile, string $data);
 }
