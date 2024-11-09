@@ -19,7 +19,7 @@ class TXTManager implements FileManager
 
             $content = file_get_contents($pathToFile);
 
-            if ($content !== false) {
+            if (!is_bool($content)) {
                 return $content;
             }
 

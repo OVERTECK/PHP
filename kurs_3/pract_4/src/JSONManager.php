@@ -12,13 +12,14 @@ class JSONManager implements FileManager
     public function readFile(string $pathToFile): ?string
     {
         try {
-            if (!file_exists($pathToFile))
+            if (!file_exists($pathToFile)) {
                 throw new myEx\InvalidPathToFileException("Invalid path to file.");
+            }
 
             $content = file_get_contents($pathToFile);
 
-            if ($content !== false) {
-                $content = json_decode($content, flags: JSON_THROW_ON_ERROR);
+            if (!is_bool($content)) {
+                json_decode($content, flags: JSON_THROW_ON_ERROR);
 
                 return $content;
             }
@@ -33,8 +34,9 @@ class JSONManager implements FileManager
     public function writeFile(string $pathToFile, string $data): void
     {
         try {
-            if (!file_exists($pathToFile))
+            if (!file_exists($pathToFile)) {
                 throw new myEx\InvalidPathToFileException("Invalid path to file.");
+            }
 
             $file = json_encode($data, flags: JSON_THROW_ON_ERROR);
 
