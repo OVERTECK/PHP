@@ -6,7 +6,7 @@ namespace App;
 
 use App\MyException as myEx;
 
-require_once 'vendor\autoload.php';
+require_once '\..\vendor\autoload.php';
 
 class TXTManager implements FileManager
 {
