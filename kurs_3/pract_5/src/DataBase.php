@@ -12,14 +12,14 @@ class DataBase
     private string $user = 'root';
     private string $password = 'root';
     private string $charset = 'utf8';
-    private string $DSN;
+    private string $dsn;
     private PDO $pdo;
     public function __construct()
     {
-        $this->DSN = "mysql:host={$this->host};dbname={$this->db};charset={$this->charset}";
+        $this->dsn = "mysql:host={$this->host};dbname={$this->db};charset={$this->charset}";
 
         try {
-            $this->pdo = new PDO($this->DSN, $this->user, $this->password);
+            $this->pdo = new PDO($this->dsn, $this->user, $this->password);
         } catch (\PDOException $ex) {
             echo $ex;
         }
