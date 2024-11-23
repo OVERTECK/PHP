@@ -7,7 +7,7 @@ use App\Exceptions\UserNotFound;
 
 class DataBase
 {
-    private string $host = 'localhost';
+    private string $host = '127.0.0.1';
     private string $db = 'db_php';
     private string $user = 'root';
     private string $password = 'root';
