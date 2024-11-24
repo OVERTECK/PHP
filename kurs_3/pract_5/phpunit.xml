@@ -4,6 +4,5 @@
         displayDetailsOnTestsThatTriggerErrors="true"
         displayDetailsOnTestsThatTriggerNotices="true"
         displayDetailsOnTestsThatTriggerWarnings="true"
-        displayDetailsOnPhpunitDeprecations="true"
->
+        displayDetailsOnPhpunitDeprecations="true">
 </phpunit>

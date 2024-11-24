@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App;
 
 use PDO;
@@ -27,9 +29,9 @@ class DataBase
 
     /**
      * @param  \App\User $newUser
-     * @return void
+     * @return bool
      */
-    public function addUser(User $newUser): void
+    public function addUser(User $newUser): bool
     {
         try {
             $pattern = $this->pdo->prepare('INSERT INTO db_php.users(login, email, password) VALUES(:login, :email, :password)');
@@ -39,12 +41,17 @@ class DataBase
             $pattern->bindValue('password', password_hash($newUser->getLogin(), PASSWORD_DEFAULT), PDO::PARAM_STR);
 
             $pattern->execute();
+
+            return true;
+
         } catch (\PDOException $ex) {
             $code = $ex->getCode();
 
             if ($code == 23000) {
                 echo "Exception. One of the fields is occupied.";
             }
+
+            return false;
         }
     }
 
@@ -101,9 +108,9 @@ class DataBase
     /**
      * @param  int       $id
      * @param  \App\User $newUser
-     * @return void
+     * @return bool
      */
-    public function changeUserById(int $id, User $newUser): void
+    public function changeUserById(int $id, User $newUser): bool
     {
         try {
             $pattern = $this->pdo->prepare('SELECT * FROM users WHERE idusers = :id');
@@ -125,8 +132,12 @@ class DataBase
 
             $pattern->execute();
 
+            return true;
+
         } catch (UserNotFound $ex) {
             echo $ex->getMessage();
+
+            return false;
         }
     }
 
@@ -144,7 +155,7 @@ class DataBase
         return [];
     }
 
-    public function deleteUserByLogin(string $login): void
+    public function deleteUserByLogin(string $login): bool
     {
         try {
             $pattern = $this->pdo->prepare('SELECT * FROM users WHERE login = :login');
@@ -163,8 +174,12 @@ class DataBase
 
             $pattern->execute();
 
+            return true;
+
         } catch (UserNotFound $ex) {
             echo $ex->getMessage();
+
+            return false;
         }
     }
 }

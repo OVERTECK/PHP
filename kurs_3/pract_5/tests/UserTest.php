@@ -4,25 +4,24 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use PHPStan\BetterReflection\Reflection\ReflectionClass;
+use App\Exceptions\InvalidEmail;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use App\User;
-//use App\Exceptions as Ex;
+use ReflectionClass;
 
 class UserTest extends TestCase
 {
-    public static function dataProvider(): array
+    public static function dataProviderPassword(): array
     {
         return [
-            [""],
-            ["123456"],
-            ["qwerty"],
-            ["1234qwerty567"]
+            ["12345678910"],
+            ["asdfdgfdghh"],
+            ["modf1240fksdo"]
+
         ];
     }
-
-    #[DataProvider("dataProvider")]
+    #[DataProvider("dataProviderPassword")]
     public function testGetPassword(string $password): void
     {
         $returnedUser = new User('root', 'korkin.06@inbox.ru', $password);
@@ -30,12 +29,21 @@ class UserTest extends TestCase
         self::assertSame($password, $returnedUser->getPassword());
     }
 
-    #[DataProvider("dataProvider")]
+    public static function dataProviderLogin(): array
+    {
+        return [
+            ["root"],
+            ["123456"],
+            ["qwerty"],
+            ["1234qwerty567"]
+        ];
+    }
+    #[DataProvider("dataProviderLogin")]
     public function testGetLogin(string $login): void
     {
-        $returnedUser = new User('root', $login, '123456');
+        $returnedUser = new User($login, 'korkin.06@inbox.ru', '12345678910');
 
-        self::assertSame($login, $returnedUser->getEmail());
+        self::assertSame($login, $returnedUser->getLogin());
     }
 
     public static function dataProviderEmail(): array
@@ -52,14 +60,8 @@ class UserTest extends TestCase
     #[DataProvider("dataProviderEmail")]
     public function testGetEmail(string $email): void
     {
-        $returnedUser = new User('root', $email, '123456');
+        $returnedUser = new User('root', $email, '12345678910');
 
         self::assertSame($email, $returnedUser->getEmail());
-    }
-
-    #[DataProvider('dataProviderEmail')]
-    public function testValidEmail($email): void
-    {
-
     }
 }
