@@ -15,9 +15,13 @@ class CSVManager implements FileManager
         return $this->splitterRead;
     }
 
-    public function setSplitterRead(string $newSpliter): void
+    public function setSplitterRead(string $newSplitter): void
     {
-        $this->splitterRead = $newSpliter;
+        if ($newSplitter === '') {
+            throw new myEx\InvalidSplitterException();
+        }
+
+        $this->splitterRead = $newSplitter;
     }
 
     private string $splitterWrite = ',';
@@ -27,44 +31,31 @@ class CSVManager implements FileManager
         return $this->splitterWrite;
     }
 
-    public function setSplitterWrite(string $newSpliter): void
+    public function setSplitterWrite(string $newSplitter): void
     {
-        $this->splitterWrite = $newSpliter;
+        if ($newSplitter === '') {
+            throw new myEx\InvalidSplitterException();
+        }
+
+        $this->splitterWrite = $newSplitter;
     }
 
-    public function readFile(string $pathToFile): ?string
+    public function readFile(string $pathToFile): ?array
     {
-        try {
-            if (!file_exists($pathToFile)) {
-                throw new myEx\InvalidPathToFileException("Invalid path to file.");
-            }
-
-            $content = file_get_contents($pathToFile);
-
-            if (!is_bool($content)) { 
-                return $content;
-            }
-            return null;
-        } catch (myEx\InvalidPathToFileException $ex) {
-            echo $ex->getMessage();
-
-            return null;
+        if (!file_exists($pathToFile)) {
+            throw new myEx\InvalidPathToFileException("Invalid path to file.");
         }
+
+        return explode($this->getSplitterRead(), file_get_contents($pathToFile));
     }
     public function writeFile(string $pathToFile, string $data): void
     {
-        try {
-            if (!file_exists($pathToFile)) {
-                throw new myEx\InvalidPathToFileException("Invalid path to file.");
-            }
-
-            if ($this->getSplitterRead() !== "") {
-                $arr = explode($this->getSplitterRead(), $data);
-        
-                file_put_contents($pathToFile, implode($this->getSplitterWrite(), $arr));
-            }
-        } catch (myEx\InvalidPathToFileException $ex) {
-            echo $ex->getMessage();
+        if (!file_exists($pathToFile)) {
+            throw new myEx\InvalidPathToFileException("Invalid path to file.");
         }
+
+        $arr = explode($this->getSplitterRead(), $data);
+
+        file_put_contents($pathToFile, implode($this->getSplitterWrite(), $arr));
     }
 }
