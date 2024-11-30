@@ -8,7 +8,7 @@ use App\MyException as myEx;
 
 class TXTManager implements FileManager
 {
-    public function readFile(string $pathToFile): ?string
+    public function readFile(string $pathToFile): false|string
     {
         if (!file_exists($pathToFile)) {
             throw new myEx\InvalidPathToFileException("Invalid path to file.");

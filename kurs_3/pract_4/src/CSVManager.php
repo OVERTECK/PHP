@@ -40,14 +40,25 @@ class CSVManager implements FileManager
         $this->splitterWrite = $newSplitter;
     }
 
+    /**
+     * @param string $pathToFile
+     * @return array<string>|null
+     * @throws myEx\InvalidPathToFileException
+     */
     public function readFile(string $pathToFile): ?array
     {
         if (!file_exists($pathToFile)) {
             throw new myEx\InvalidPathToFileException("Invalid path to file.");
         }
 
-        return explode($this->getSplitterRead(), file_get_contents($pathToFile));
+        $data = file_get_contents($pathToFile);
+
+        if (is_bool($data))
+            return null;
+
+        return explode($this->getSplitterRead(), $data);
     }
+
     public function writeFile(string $pathToFile, string $data): void
     {
         if (!file_exists($pathToFile)) {

@@ -8,13 +8,17 @@ use App\MyException as myEx;
 
 class JSONManager implements FileManager
 {
-    public function readFile(string $pathToFile)
+    public function readFile(string $pathToFile): mixed
     {
         if (!file_exists($pathToFile)) {
             throw new myEx\InvalidPathToFileException("Invalid path to file.");
         }
 
         $content = file_get_contents($pathToFile);
+
+        if (is_bool($content)) {
+            return null;
+        }
 
         return json_decode($content, flags: JSON_THROW_ON_ERROR);
     }
