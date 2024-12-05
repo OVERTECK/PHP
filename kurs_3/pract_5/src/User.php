@@ -28,19 +28,22 @@ class User
 
     private function validLogin(string $login): bool
     {
-        if (4 > strlen($login) || strlen($login) > 15)
+        if (4 > strlen($login) || strlen($login) > 15) {
             throw new InvalidLogin('Exception. Length should be between 5 and 15 chars.');
+        }
 
-        if (str_contains($login, ' ') !== false)
+        if (str_contains($login, ' ') !== false) {
             throw new InvalidLogin('Exception. Login can`t contain spaces.');
+        }
 
         return true;
     }
 
     private function validPassword(string $password): bool
     {
-        if (10 > strlen($password) || strlen($password) > 100)
+        if (10 > strlen($password) || strlen($password) > 100) {
             throw new InvalidPassword('Exception. Length should be between 10 and 100 chars.');
+        }
 
         return true;
     }
