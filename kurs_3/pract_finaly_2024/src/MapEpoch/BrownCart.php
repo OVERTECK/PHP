@@ -1,10 +1,20 @@
 <?php
 
-namespace src;
+namespace App;
 
 class BrownCart extends AbstractMapEpoch
 {
-    protected string $color = "brown";
+    protected static string $color = "brown";
 
+    protected array $production;
 
+    public function __construct(
+        $title,
+        $production,
+        $effect,
+        $price,
+        $numberEpoch,
+        $minCountPlayers
+    )
+    {}
 }
