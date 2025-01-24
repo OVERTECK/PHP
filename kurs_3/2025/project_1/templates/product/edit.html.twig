@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Edit page</title>
+	</head>
+	<body>
+		<form action="{{ path("edit", {product: product.id}) }}" method="POST">
+            
+			<div class="div">
+                <label class="label">Название</label>
+				<input type="text" name="name" value="{{ product.name }}">
+			</div>
+
+			<div class="div">
+                <label class="label">Цена</label>
+				<input type="number" name="price" value="{{ product.price }}">
+			</div>
+
+			<div class="div">
+                <label class="label">Количество</label>
+				<input type="number" name="count" value="{{ product.count }}">
+			</div>
+            
+            <input type="hidden" name="_method" value="PUT">
+            
+			<button>Изменить</button>
+		</form>
+	</body>
+</html>
