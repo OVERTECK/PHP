@@ -1,0 +1,15 @@
+Time: 2024-10-16T17:42:33+03:00
+Status: Отправлено
+Type: SMS
+Message: Привет
+
+Time: 2024-10-16T17:42:33+03:00
+Status: Отправлено
+Type: SMS
+Message: Some message
+
+Time: 2024-10-16T17:42:33+03:00
+Status: Отправлено
+Type: Email
+Message: Email message
+
