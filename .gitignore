@@ -2,3 +2,5 @@ help.php
 vendor
 .idea
 .phpunit.result.cache
+.vs
+.vscode
