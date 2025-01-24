@@ -19,9 +19,20 @@
                     <td>{{product.name}}</td>
                     <td>{{product.count}}</td>
                     <td>{{product.price}}</td>
+                    <td>
+                        <form action="{{ path("edit_page", {product: product.id}) }}" method="GET">
+                            <button>
+                                Редактировать
+                            </button>
+                        </form>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+
+    <form action="{{ path("create_product_page") }}" method="GET">
+        <button>Создать продукт</button>
+    </form>
 </body>
 </html>

@@ -6,11 +6,32 @@
 		<title>Document</title>
 	</head>
 	<body>
-		<form>
-			<input type="text" name="name" value="{{ product.name }}">
-			<input type="number" name="price" value="{{ product.price }}">
-			<input type="number" name="count" value="{{ product.count }}">
-			<input type="submit">
+		
+		<form action="{{ path("create_product") }}" method="POST">
+			<div>
+				<input 
+				type="text" 
+				name="name" 
+				placeholder="Введите название">
+			</div>
+
+			<div>
+				<input 
+				type="number" 
+				name="price" 
+				placeholder="Введите стоимость">
+			</div>
+
+			<div>
+				<input 
+				type="number" 
+				name="count" 
+				placeholder="Введите количество">
+			</div>
+
+			<div>
+				<input type="submit">
+			</div>
 		</form>
 	</body>
 </html>
