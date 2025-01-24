@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang='en'>
+	<head>
+		<meta charset='UTF-8'>
+		<title>Edit page</title>
+	</head>
+	<body>
+		<form action='{{ path('edit', {user: user.id}) }}' method='POST'>
+            
+			<div class='div'>
+                <label class='label'>Фамилия</label>
+				<input type='text' name='first_name' value='{{ user.getFirstName }}'>
+			</div>
+
+			<div class='div'>
+                <label class='label'>Имя</label>
+				<input type='text' name='second_name' value='{{ user.getSecondName }}'>
+			</div>
+
+			<div class='div'>
+                <label class='label'>Отчество</label>
+				<input type='text' name='last_name' value='{{ user.getLastName }}'>
+			</div>
+
+			<div class='div'>
+                <label class='label'>Адрес</label>
+				<input type='text' name='address' value='{{ user.getAddress }}'>
+			</div>
+
+			<div class='div'>
+                <label class='label'>Номер телефона</label>
+				<input type='number' name='phone' value='{{ user.getPhone }}'>
+			</div>
+            
+			<div class='div'>
+                <label class='label'>Эл. почту</label>
+				<input type='email' name='email' value='{{ user.getEmail }}'>
+			</div>
+            
+            <input type='hidden' name='_method' value='PUT'>
+            
+			<input type="submit" value="Изменить">
+		</form>
+	</body>
+</html>
