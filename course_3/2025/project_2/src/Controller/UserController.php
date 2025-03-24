@@ -86,8 +86,6 @@ final class UserController extends AbstractController
             try {
                 $file->move($projectDir . '/public/images', $resultFileName);
 
-                // unlink($projectDir . $user->getPathToImage());
-
                 $user->setPathToImage("/public/images/" . $resultFileName);
             } catch (FileException $ex) {
                 echo $ex->getMessage();
