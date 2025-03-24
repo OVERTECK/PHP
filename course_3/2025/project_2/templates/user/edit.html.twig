@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="{{path('edit_user_main', {'user': user.id})}}" method="POST" enctype="multipart/form-data">
+        <div>
+            <span>Фотография: </span>
+            <input type="file" name="image">
+        </div>
+
+        <input type="hidden" name="_method" value="PUT">
+        <span>Отдел: </span>
+        <select name="departmentSelected">
+            {% for department in departments %}
+                <option value="{{department.id}}">{{department.title}}</option>    
+            {% endfor %}
+        </select>
+        <div>
+            <span>Имя: </span>
+            <input name="firstName" value="{{user.firstName}}">
+        </div>
+        <div>
+            <span>Фамилия: </span>
+            <input name="lastName" value="{{user.lastName}}">
+        </div>
+        <div>
+            <span>Возраст: </span>
+            <input name="age" value="{{user.age}}">
+        </div>
+        <div>
+            <span>Статус: </span>
+            <input name="status" value="{{user.status}}">
+        </div>
+        <div>
+            <span>Почта: </span>
+            <input name="email" value="{{user.email}}">
+        </div>
+        <div>
+            <span>Телеграм: </span>
+            <input name="telegram" value="{{user.telegram}}">
+        </div>
+        <div>
+            <span>Адрес: </span>
+            <input name="address" value="{{user.address}}">
+        </div>
+        <button>Редактировать</button>
+    </form>
+</body>
+</html>

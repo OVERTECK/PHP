@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пользователи</title>
+</head>
+<body>
+    <header>Поиск</header>
+    <form action="{{ path('list_users') }}" method="GET">
+        <span>Поле: </span>
+        <select name="selectedSearchField">
+            <option value="-1">Не выбрано</option>
+            <option {% if selectedSearchField == 'u.first_name' %} selected {% endif %} value="u.first_name">Имя</option>
+            <option {% if selectedSearchField == 'u.email' %} selected {% endif %} value="u.email">Почта</option>
+            <option {% if selectedSearchField == 'd.title' %} selected {% endif %} value="d.title">Отдел</option>
+        </select>
+
+        <input value="{{search}}" name="q" placeholder="Введите значение для поиска">
+
+        <header>Сортировка</header>
+        <span>Поле: </span>
+        <select title="Поле сортировки" name="fieldSortSelect">
+            <option value="-1">Не выбрано</option>
+            <option {% if selectedField == 'first_name' %} selected {% endif %} value="first_name">Имя</option>
+            <option {% if selectedField == 'last_name' %} selected {% endif %} value="last_name">Фамилия</option>
+            <option {% if selectedField == 'age' %} selected {% endif %} value="age">Возраст</option>
+            <option {% if selectedField == 'status' %} selected {% endif %} value="status">Статус</option>
+            <option {% if selectedField == 'email' %} selected {% endif %} value="email">Почта</option>
+            <option {% if selectedField == 'telegram' %} selected {% endif %} value="telegram">Телеграм</option>
+            <option {% if selectedField == 'address' %} selected {% endif %} value="address">Адрес</option>
+        </select>
+
+        <select title="Вид сортировки" name="typeSortSelect">
+            <option value="-1">Не выбрано</option>
+            <option {% if selectedTypeSorted == 'ASC' %} selected {% endif %} value="ASC">По возрастанию</option>
+            <option {% if selectedTypeSorted == 'DESC' %} selected {% endif %} value="DESC">По убыванию</option>
+        </select>
+        <button>Поиск</button>
+    </form>
+
+    <table>
+        <thead>
+            <th>Фотография</th>
+            <th>Отдел</th>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Возраст</th>
+            <th>Статус</th>
+            <th>Почта</th>
+            <th>Телеграм</th>
+            <th>Адрес</th>
+        </thead>
+        
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>
+                        {% if user.pathToImage == null %}
+                            <image src="{{ asset("/public/images/no_image.png") }}" alt="image1" width="100"></image>
+                        {% else %}
+                            <image src="{{user.pathToImage}}" alt="image2" width="100"></image>
+                        {% endif %}
+                    </td>
+                    <td>{{user.department.title}}</td>
+                    <td>{{user.firstName}}</td>
+                    <td>{{user.lastName}}</td>
+                    <td>{{user.age}}</td>
+                    <td>{{user.status}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.telegram}}</td>
+                    <td>{{user.address}}</td>
+                    <td>
+                        <a href="{{path('edit_user', {'id': user.id})}}">Редактировать</a>
+                    </td>
+                    <td>
+                        <form action="{{path('delete_user', {'user': user.id})}}" method="POST">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button>Удалить</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path("create_user_page")}}">Создать</a>
+</body>
+</html>

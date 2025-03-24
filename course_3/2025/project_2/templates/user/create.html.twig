@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="{{ path('create_user') }}" method="POST" enctype="multipart/form-data">
+
+        <div>
+            <span>Фотография: </span>
+            <input type="file" name="image">
+        </div>
+
+        <span>Отдел: </span>
+        <select name="departmentSelected">
+            {% for department in departments %}
+                <option value="{{department.id}}">{{department.title}}</option>    
+            {% endfor %}
+        </select>
+        <div>
+            <span>Имя: </span>
+            <input name="firstName" required>
+        </div>
+        <div>
+            <span>Фамилия: </span>
+            <input name="lastName" required>
+        </div>
+        <div>
+            <span>Возраст: </span>
+            <input name="age" required>
+        </div>
+        <div>
+            <span>Статус: </span>
+            <input name="status" required>
+        </div>
+        <div>
+            <span>Почта: </span>
+            <input name="email" required>
+        </div>
+        <div>
+            <span>Телеграм: </span>
+            <input name="telegram" required>
+        </div>
+        <div>
+            <span>Адрес: </span>
+            <input name="address" required>
+        </div>
+        <button>Создать</button>
+    </form>
+</body>
+</html>
