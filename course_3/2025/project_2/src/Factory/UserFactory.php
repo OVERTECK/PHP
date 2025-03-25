@@ -2,6 +2,7 @@
 
 namespace App\Factory;
 
+use App\Entity\Department;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityRepository;
@@ -36,11 +37,13 @@ final class UserFactory extends PersistentProxyObjectFactory{
     {
         return [
             'address' => self::faker()->address(255),
-            'age' => self::faker()->randomNumber(),
+            'telegram' => self::faker()->word(10),
+            'age' => mt_rand(18, 100),
             'email' => self::faker()->email(255),
             'first_name' => self::faker()->name(255),
             'last_name' => self::faker()->lastName(255),
-            'status' => self::faker()->text(),
+            'status' => self::faker()->text(10),
+            'department' => new Department()->setTitle(self::faker()->word(20)),
         ];
     }
 
