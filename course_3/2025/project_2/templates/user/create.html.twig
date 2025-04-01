@@ -6,6 +6,17 @@
     <title>Document</title>
 </head>
 <body>
+
+    {% if errors|length > 0 %}
+        <ul>
+            {% for error in errors %}
+                <li>
+                    {{ error.message }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
     <form action="{{ path('create_user') }}" method="POST" enctype="multipart/form-data">
 
         <div>
@@ -16,36 +27,37 @@
         <span>Отдел: </span>
         <select name="departmentSelected">
             {% for department in departments %}
-                <option value="{{department.id}}">{{department.title}}</option>    
+                <option value="{{department.id}}">{{department.title}}</option>
             {% endfor %}
         </select>
+
         <div>
             <span>Имя: </span>
-            <input name="firstName" required>
+            <input name="firstName">
         </div>
         <div>
             <span>Фамилия: </span>
-            <input name="lastName" required>
+            <input name="lastName">
         </div>
         <div>
             <span>Возраст: </span>
-            <input name="age" required>
+            <input name="age">
         </div>
         <div>
             <span>Статус: </span>
-            <input name="status" required>
+            <input name="status">
         </div>
         <div>
             <span>Почта: </span>
-            <input name="email" required>
+            <input name="email">
         </div>
         <div>
             <span>Телеграм: </span>
-            <input name="telegram" required>
+            <input name="telegram">
         </div>
         <div>
             <span>Адрес: </span>
-            <input name="address" required>
+            <input name="address">
         </div>
         <button>Создать</button>
     </form>

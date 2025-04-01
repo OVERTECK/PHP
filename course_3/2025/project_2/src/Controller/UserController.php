@@ -15,10 +15,11 @@ use LDAP\Result;
 use PhpParser\Builder\Method;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class UserController extends AbstractController
 {
-    #[Route('/user', name: 'list_users')]
+    #[Route('/user', name: 'list_users', methods: ['GET'])]
     public function index(UserRepository $userRepository, Request $request): Response
     {
         $selectedFieldSort = $request->query->get('fieldSortSelect', '-1');
@@ -48,7 +49,7 @@ final class UserController extends AbstractController
             'selectedField' => $selectedFieldSort,
             'selectedTypeSorted' => $selectedTypeSorted,
             'search' => $search,
-            'selectedSearchField' => $selectedSearchField
+            'selectedSearchField' => $selectedSearchField,
         ]);
     }
 
@@ -124,6 +125,7 @@ final class UserController extends AbstractController
 
         return $this->render('/user/create.html.twig', [
             'departments' => $departments,
+            'errors' => [],
         ]);
     }
 
@@ -132,8 +134,10 @@ final class UserController extends AbstractController
         Request $request,
         DepartmentRepository $departments,
         EntityManagerInterface $em,
-        SluggerInterface $slugger
+        SluggerInterface $slugger,
+        ValidatorInterface $validator,
     ): Response {
+
         $newUser = new User();
 
         $file = $request->files->get('image');
@@ -158,11 +162,24 @@ final class UserController extends AbstractController
         $newUser->setDepartment($department);
         $newUser->setFirstName($request->request->get('firstName'));
         $newUser->setLastName($request->request->get('lastName'));
-        $newUser->setAge($request->request->get('age'));
+
+        $age = $request->request->get('age');
+        $age = $age == "" ? null : $age;
+
+        $newUser->setAge($age);
         $newUser->setStatus($request->request->get('status'));
         $newUser->setEmail($request->request->get('email'));
         $newUser->setTelegram($request->request->get('telegram'));
         $newUser->setAddress($request->request->get('address'));
+
+        $errors = $validator->validate($newUser);
+
+        if ($errors->count() > 0) {
+            return $this->render("user/create.html.twig", [
+                'errors' => $errors,
+                'departments' => $departments->findAll(),
+            ]);
+        }
 
         $em->persist($newUser);
         $em->flush();

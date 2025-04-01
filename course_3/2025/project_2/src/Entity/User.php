@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User
@@ -17,24 +18,35 @@ class User
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min: 2, max: 255, minMessage: "Ошибка! Длина имени должна составлять от 2 до 255 символов.")]
     private ?string $first_name = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min: 2, max: 255, minMessage: "Ошибка! Поле фамилии должно содержать от 2 до 255 символов.")]
     private ?string $last_name = null;
 
-    #[ORM\Column(length: 10)]
+    #[ORM\Column(length: 10, nullable: true)]
+    #[Assert\NotBlank(message: "Ошибка! Поле возраста не должно быть пустым")]
+    #[Assert\Range(
+        notInRangeMessage: "Ошибка! Возраст может быть от 1 до 255.",
+        min: 1,
+        max: 255)]
     private ?int $age = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Ошибка! Поле статуса не должно быть пустым.")]
     private ?string $status = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Email(message: "Ошибка! Формат электронной почты неверный.")]
     private ?string $email = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Regex('/@[a-z\d_]{5, 30}/', message: 'Ошибка! Формат телеграма неверный.')]
     private ?string $telegram = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Ошибка! Поле адреса не должно быть пустым.")]
     private ?string $address = null;
 
     #[ORM\ManyToOne(inversedBy: 'users')]
@@ -77,7 +89,7 @@ class User
         return $this->age;
     }
 
-    public function setAge(int $age): static
+    public function setAge(?int $age): static
     {
         $this->age = $age;
 
