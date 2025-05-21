@@ -1,0 +1,52 @@
+services:
+  db:
+    image: mysql:5.7.22
+    restart: always
+    container_name: db
+    volumes:
+      - ./mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    user: ${GID}:${UID}
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    networks:
+      - app-network
+
+  webserver:
+    image: nginx:alpine 
+    container_name: webserver
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - .:/var/www
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    networks:
+      - app-network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        UID: ${UID}
+        GID: ${GID}
+    image: php:8.1
+    container_name: app
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www
+    volumes:
+      - .:/var/www
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
