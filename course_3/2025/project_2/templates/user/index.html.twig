@@ -59,9 +59,9 @@
                 <tr>
                     <td>
                         {% if user.pathToImage == null %}
-                            <image src="{{ asset("/public/images/no_image.png") }}" alt="image1" width="100"></image>
+                            <image src="{{ asset("/images/no_image.png") }}" alt="image1" width="100"></image>
                         {% else %}
-                            <image src="{{user.pathToImage}}" alt="image2" width="100"></image>
+                            <image src="/images/{{user.pathToImage}}" alt="image2" width="100"></image>
                         {% endif %}
                     </td>
                     <td>{{user.department.title}}</td>

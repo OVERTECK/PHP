@@ -18,38 +18,41 @@ class User
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\Length(min: 2, max: 255, minMessage: "Ошибка! Длина имени должна составлять от 2 до 255 символов.")]
+    #[Assert\Length(min: 2, max: 255, minMessage: "Ошибка! Длина имени должна составлять от 2 до 255 символов.", groups: ["firstName"])]
     private ?string $first_name = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\Length(min: 2, max: 255, minMessage: "Ошибка! Поле фамилии должно содержать от 2 до 255 символов.")]
+    #[Assert\Length(min: 2, max: 255, minMessage: "Ошибка! Поле фамилии должно содержать от 2 до 255 символов.", groups: ["lastName"])]
     private ?string $last_name = null;
 
     #[ORM\Column(length: 10, nullable: true)]
-    #[Assert\NotBlank(message: "Ошибка! Поле возраста не должно быть пустым")]
+    #[Assert\NotBlank(message: "Ошибка! Поле возраста не должно быть пустым", groups: ["age"])]
     #[Assert\Range(
         notInRangeMessage: "Ошибка! Возраст может быть от 1 до 255.",
         min: 1,
-        max: 255)]
+        max: 255,
+        groups: ["age"])]
     private ?int $age = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Ошибка! Поле статуса не должно быть пустым.")]
+    #[Assert\NotBlank(message: "Ошибка! Поле статуса не должно быть пустым.", groups: ["status"])]
     private ?string $status = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\Email(message: "Ошибка! Формат электронной почты неверный.")]
+    #[Assert\NotBlank(message: "Ошибка! Поле электронной почты не должно быть пустым.", groups: ["email"])]
+    #[Assert\Email(message: "Ошибка! Формат электронной почты неверный.", groups: ["email"])]
     private ?string $email = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\Regex('/@[a-z\d_]{5, 30}/', message: 'Ошибка! Формат телеграма неверный.')]
+    // #[Assert\Regex('/@[a-z\d_]{5, 30}/', message: 'Ошибка! Формат телеграма неверный.')]
     private ?string $telegram = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Ошибка! Поле адреса не должно быть пустым.")]
+    #[Assert\NotBlank(message: "Ошибка! Поле адреса не должно быть пустым.", groups: ["address"])]
     private ?string $address = null;
 
     #[ORM\ManyToOne(inversedBy: 'users')]
+    #[Assert\NotBlank(message: "Ошибка! Депортамент должен быть указан.", groups: ["department"])]
     private ?Department $department = null;
 
     #[ORM\Column(length: 255, nullable: true)]
