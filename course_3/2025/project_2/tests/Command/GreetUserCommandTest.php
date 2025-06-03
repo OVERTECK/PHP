@@ -8,41 +8,54 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 class CreateUserCommandTest extends KernelTestCase
 {
-    public function testExecute(): void
+    private CommandTester $commandTester;
+
+    protected function setUp(): void
     {
         self::bootKernel();
         $application = new Application(self::$kernel);
 
         $command = $application->find('app:greet-user');
-        $commandTester = new CommandTester($command);
-
-        # Базовая проверка
-        $commandTester->execute([
+        $this->commandTester = new CommandTester($command);
+    }
+    
+    # Базовая проверка
+    public function testExecute(): void
+    {
+        $this->commandTester->execute([
             'username' => 'Walter',
         ]);
 
-        $this->assertStringContainsString('Hello, Walter', $commandTester->getDisplay());
+        $this->assertStringContainsString('Hello, Walter', $this->commandTester->getDisplay());
+    }
 
-        # Проверка опции --shout
-        $commandTester->execute([
+    # Проверка опции --shout
+    public function testOption(): void
+    {
+        $this->commandTester->execute([
             'username' => 'Walter',
             '--shout' => true,
         ]);
 
-        $this->assertStringContainsString('HELLO, WALTER', $commandTester->getDisplay());
+        $this->assertStringContainsString('HELLO, WALTER', $this->commandTester->getDisplay());
+    }
 
-        # Проверка опции -s
-        $commandTester->execute([
+    # Проверка опции -s
+    public function testOption2(): void
+    {
+        $this->commandTester->execute([
             'username' => 'Walter',
             '-s' => true,
         ]);
 
-        $this->assertStringContainsString('HELLO, WALTER', $commandTester->getDisplay());
+        $this->assertStringContainsString('HELLO, WALTER', $this->commandTester->getDisplay());
+    }
 
-
-        # Проверка обязательности аргумента username
+    # Проверка обязательности аргумента username
+    public function testArgument(): void
+    {
         $this->expectException(\RuntimeException::class);
 
-        $commandTester->execute([]);
+        $this->commandTester->execute([]);
     }
 }
