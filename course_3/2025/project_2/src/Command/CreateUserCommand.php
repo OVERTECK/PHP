@@ -23,15 +23,14 @@ class CreateUserCommand extends Command
         private EntityManagerInterface $em,
         private DepartmentRepository $departmentRepository,
         private ValidatorInterface $validatorInterface
-    )
-    {
+    ) {
         parent::__construct();
     }
 
     protected function execute(
-        InputInterface $input, 
-        OutputInterface $output): int
-    {
+        InputInterface $input,
+        OutputInterface $output
+    ): int {
         $newUser = new User();
 
         $errors = $this->validatorInterface->validate($newUser);
@@ -100,7 +99,7 @@ class CreateUserCommand extends Command
                 }
             }
         } while ($errors->count() > 0);
-        
+
         do {
             $userTelegram = readline("\n\033[92m" . " Enter the user's telegram:" . "\033[39m" . "\n> ");
             $newUser->setTelegram($userTelegram);
@@ -126,7 +125,7 @@ class CreateUserCommand extends Command
                 }
             }
         } while ($errors->count() > 0);
-        
+
         do {
             $userDepartmentId = readline("\n\033[92m" . " Enter the user's department:" . "\033[39m" . "\n> ");
             $userDepartment = $this->departmentRepository->find($userDepartmentId);
@@ -140,7 +139,7 @@ class CreateUserCommand extends Command
                 }
             }
         } while ($errors->count() > 0);
-        
+
         $userTitleImage = readline("\n\033[92m" . " Enter the user's title image:" . "\033[39m" . "\n> ");
         $newUser->setPathToImage($userTitleImage);
 

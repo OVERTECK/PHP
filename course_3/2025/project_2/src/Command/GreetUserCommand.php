@@ -25,22 +25,20 @@ class GreetUserCommand extends Command
         private EntityManagerInterface $em,
         private DepartmentRepository $departmentRepository,
         private ValidatorInterface $validatorInterface
-    )
-    {
+    ) {
         parent::__construct();
     }
 
     protected function execute(
-        InputInterface $input, 
-        OutputInterface $output): int
-    {
+        InputInterface $input,
+        OutputInterface $output
+    ): int {
         $userName = $input->getArgument("username");
         $shout = $input->getOption("shout");
 
         if ($shout) {
             $output->writeln("HELLO, " . strtoupper($userName));
-        } 
-        else {
+        } else {
             $output->writeln("Hello, {$userName}");
         }
 
