@@ -1,6 +1,6 @@
 services:
   db:
-    image: mysql:5.7.22
+    image: mysql:8.0.32
     restart: always
     container_name: db
     volumes:

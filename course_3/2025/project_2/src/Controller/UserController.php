@@ -9,11 +9,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\User;
+use App\Message\DeleteUserMessage;
 use App\Repository\DepartmentRepository;
 use Doctrine\ORM\EntityManager;
 use LDAP\Result;
 use PhpParser\Builder\Method;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\Messenger\MessageBus;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -110,10 +113,9 @@ final class UserController extends AbstractController
     }
 
     #[Route('/user/delete/{user}', name: 'delete_user', methods: ['DELETE'])]
-    public function deleteUser(User $user, EntityManagerInterface $em): Response
+    public function deleteUser(User $user, MessageBusInterface $bus): Response
     {
-        $em->remove($user);
-        $em->flush();
+        $bus->dispatch(new DeleteUserMessage($user->getId()));
 
         return $this->redirect('/user');
     }

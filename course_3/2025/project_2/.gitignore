@@ -1,7 +1,7 @@
 
 
 ###> symfony/framework-bundle ###
-/src/Report/
+src/Report/**
 /.env.local
 /.env.local.php
 /.env.*.local

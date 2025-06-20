@@ -47,31 +47,30 @@ class CreateReportCommand extends Command
             ->getQuery()
             ->getResult();
 
+        $headers = ["FirstName", "LastName", "Status", "Email", "Telegram", "Address", "Title"];
+
+        $headers = WriterEntityFactory::createRowFromArray($headers);
+
+        $writter->addRow($headers);
+
         foreach ($users as $user) {
 
-            $listUser = (array) $user;
-
-            foreach ($listUser as $key => $userValue) {
-                if ($userValue === null)
-                    $listUser[$key] = "";
-            }
-
-            $row = WriterEntityFactory::createRowFromArray($listUser);
+            $row = WriterEntityFactory::createRowFromArray($user);
 
             $writter->addRow($row);
         }
 
         $writter->close();
 
-        $email = (new Email())
-            ->from('sasakorkin321@gmail.com')
-            ->to("korkin.06@inbox.ru")
-            ->addPart(new DataPart(fopen($filePath, "r"), $fileName))
-            ->subject('Ваш отчёт готов')
-            ->html('<p>Отчёт во вложении.</p>')
-            ->text('Отчёт во вложении.');
+        // $email = (new Email())
+        //     ->from('sasakorkin321@gmail.com')
+        //     ->to("korkin.06@inbox.ru")
+        //     ->addPart(new DataPart(fopen($filePath, "r"), $fileName))
+        //     ->subject('Ваш отчёт готов')
+        //     ->html('<p>Отчёт во вложении.</p>')
+        //     ->text('Отчёт во вложении.');
 
-        $this->mailer->send($email);
+        // $this->mailer->send($email);
 
         return Command::SUCCESS;
     }
